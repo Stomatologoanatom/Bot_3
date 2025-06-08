@@ -1,85 +1,141 @@
 import feedparser
-from datetime import datetime, timedelta, timezone
-import httpx
 import os
+import logging
+import requests
+import re
+import asyncio
+from html import unescape
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-# Загружаем переменные из .env
+# Настройка логирования
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
+# Загрузка переменных окружения
 load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
+# RSS источники (исправлены запятые)
 FEEDS = [
-    "https://feeds.reuters.com/reuters/worldNews",
-    "https://feeds.bbci.co.uk/news/world/rss.xml",
-    "https://rss.cnn.com/rss/edition_world.rss",
-    "https://rss.cnn.com/rss/cnn_allpolitics.rss",
-    "https://www.bloomberg.com/feed/podcast/politics.xml",
-    "https://www.nbcnews.com/id/3032553/device/rss/rss.xml",
-    "https://apnews.com/rss/apf-politics"
+    "https://feeds.washingtonpost.com/rss/politics?itid=lk_inline_manual_2",
+    "https://feeds.washingtonpost.com/rss/national",
+    "https://feeds.washingtonpost.com/rss/business",
+    "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
+    "https://www.wsj.com/xml/rss/3_7014.xml",
+
+    "https://www.ft.com/?format=rss",
+
+
+    "https://www.aljazeera.com/xml/rss/all.xml",
+    "https://www.theguardian.com/world/rss",
+
+    "https://rss.politico.com/politico.xml",
+    "http://feeds.skynews.com/feeds/rss/world.xml"
 ]
 
-def is_recent(entry, hours=48):
-    if 'published_parsed' in entry:
-        pub_date = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-        now = datetime.now(timezone.utc)
-        delta = now - pub_date
-        print(f"🕒 {entry.title[:30]} — опубликовано {delta} назад")
-        return delta <= timedelta(hours=hours)
-    return False
+# Удаление HTML-тегов
+def clean_html(raw_html: str) -> str:
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', raw_html)
+    return unescape(cleantext).strip()
 
-async def translate_text(text: str) -> str:
+# Синхронный перевод
+def translate_text_sync(text: str, lang_from="en", lang_to="ru") -> str:
     if not text.strip():
-        return "(нет текста для перевода)"
+        return text
     try:
         url = "https://api.mymemory.translated.net/get"
-        params = {"q": text, "langpair": "en|ru"}
-        async with httpx.AsyncClient(timeout=10) as client:
-            response = await client.get(url, params=params)
-            response.raise_for_status()
-            data = response.json()
-            translated = data.get("responseData", {}).get("translatedText")
-            if not translated:
-                print(f"⚠️ Пустой ответ от API: {response.text}")
-                return "(ошибка перевода: пустой ответ)"
-            return translated
+        params = {"q": text[:500], "langpair": f"{lang_from}|{lang_to}"}
+        response = requests.get(url, params=params, timeout=10)
+        data = response.json()
+        return data['responseData']['translatedText']
     except Exception as e:
-        print(f"❌ Ошибка перевода: {e}")
-        return f"(ошибка перевода: {e})"
+        logger.error(f"Ошибка перевода текста: {e}")
+        return text
 
+# Асинхронная обёртка
+async def translate_text(text: str) -> str:
+    return await asyncio.to_thread(translate_text_sync, text)
+
+# Команда /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Привет! Я бот, который собирает и переводит свежие новости. Используй /news.")
+    await update.message.reply_text("Привет! Я бот, который собирает свежие новости. Используй /news.")
 
+# Команда /news
 async def news(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🔍 Сканирую источники, собираю свежие новости...")
 
-    for url in FEEDS:
-        print(f"📡 Обрабатываю источник: {url}")
-        feed = feedparser.parse(url)
-        count = 0
-        for entry in feed.entries:
-            if count >= 3:
-                break
-            if is_recent(entry):
-                title = await translate_text(entry.title)
-                summary = await translate_text(entry.get("summary", ""))
-                link = entry.link
+    failed_sources = []
 
-                message = f"📰 <b>{title}</b>\n{summary}\n<a href=\"{link}\">Источник</a>"
-                await update.message.reply_text(message, parse_mode="HTML", disable_web_page_preview=True)
-                print(f"✅ Отправлена новость: {title}")
-                count += 1
+    for url in FEEDS:
+        logger.info(f"🔄 Обработка источника: {url}")
+        try:
+            feed = feedparser.parse(url)
+        except Exception as e:
+            logger.error(f"❌ Ошибка загрузки RSS {url}: {e}")
+            failed_sources.append(url)
+            continue
+
+        if feed.bozo:
+            logger.warning(f"⚠️ Проблема с парсингом: {url} — {feed.bozo_exception}")
+            failed_sources.append(url)
+            continue
+
+        total_news = len(feed.entries)
+        logger.info(f"✅ Найдено {total_news} новостей в источнике: {url}")
+
+        entries = feed.entries[:3]  # Ограничение на 3 новости
+        logger.info(f"📌 Обрабатываем первые {len(entries)} новости")
+
+        for i, entry in enumerate(entries, start=1):
+            title = getattr(entry, 'title', "(без заголовка)")
+            summary_raw = entry.get("summary", "") or entry.get("description", "") or ""
+            summary = clean_html(summary_raw)
+            if not summary:
+                summary = "(нет описания)"
+            link = getattr(entry, 'link', "")
+
+            logger.info(f"🔸 Новость {i}: {title}")
+
+            translated_title = await translate_text(title)
+            translated_summary = await translate_text(summary)
+
+            message = (
+                f"📰 <b>{translated_title}</b>\n"
+                f"{translated_summary}\n"
+                f"<a href=\"{link}\">Источник</a>"
+            )
+
+            try:
+                await update.message.reply_text(
+                    message, parse_mode="HTML", disable_web_page_preview=True
+                )
+            except Exception as e:
+                logger.error(f"❌ Ошибка при отправке сообщения: {e}")
+
+    if failed_sources:
+        logger.warning("⚠️ Не удалось обработать источники:\n" + "\n".join(failed_sources))
+        await update.message.reply_text(
+            "⚠️ Некоторые источники не были обработаны. Подробности в логах."
+        )
 
     await update.message.reply_text("✅ Новости за сегодня отправлены.")
 
+# Точка входа
 if __name__ == "__main__":
     if not TELEGRAM_BOT_TOKEN:
-        print("❌ Ошибка: TELEGRAM_BOT_TOKEN не найден. Убедитесь, что .env создан и содержит токен.")
+        logger.error("❌ TELEGRAM_BOT_TOKEN не найден. Проверь .env файл.")
         exit(1)
 
     app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("news", news))
-    print("✅ Бот запущен и ожидает сообщений.")
+
+    logger.info("🚀 Бот успешно запущен и ожидает команд.")
     app.run_polling()
