@@ -1,9 +1,7 @@
-https://asiatimes.com/feed/
-https://www3.nhk.or.jp/rss/news/cat0.xml
-http://www.chinadaily.com.cn/rss/china_rss.xml
-https://www.thehindu.com/news/national/feeder/default.rss
-https://english.yonhapnews.co.kr/RSS/all.xml
-https://www.aljazeera.com/xml/rss/all.xml
-https://www.janes.com/rss/news.xml
-https://www.defense.gov/Newsroom/News-Feeds/
-
+https://www3.nhk.or.jp/nhkworld/en/news/
+http://www.chinadaily.com.cn/
+https://www.thehindu.com/
+https://english.yonhapnews.co.kr/
+https://www.aljazeera.com/news/asia/
+https://www.janes.com/
+https://www.defense.gov/Newsroom/
