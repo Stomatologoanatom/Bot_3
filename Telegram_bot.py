@@ -35,11 +35,11 @@ except ValueError:
 
 # --- Темы и соответствующие файлы ---
 THEMES = {
-    "🏳️‍⚧️ Европа": "Topics/Europe.txt",
-    "🍜 Азия": "Topics/Asia.txt",
-    "💵 Америка": "Topics/America.txt",
-    "👳‍♂️✈🏢🏢 Ближний Восток": "Topics/MiddleEast.txt",
-    "εつ▄█▀█● НАТО": "Topics/NATO.txt"
+    "🏳️‍⚧️ Европа": "Europe.txt",
+    "🍜 Азия": "Asia.txt",
+    "💵 Америка": "America.txt",
+    "👳‍♂️✈🏢🏢 Ближний Восток": "MiddleEast.txt",
+    "εつ▄█▀█● НАТО": "NATO.txt"
     # Добавь свои темы и файлы тут
 }
 
