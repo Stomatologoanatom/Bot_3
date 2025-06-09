@@ -1,7 +1,7 @@
-https://www.aljazeera.com/xml/rss/all.xml
-https://www.arabnews.com/rss.xml
-https://www.thenationalnews.com/feed/
-https://www.haaretz.com/cmlink/1.6408574
-https://www.jpost.com/Rss/RssFeedsHeadlines.aspx
-https://www.middleeasteye.net/rss.xml
-https://www.reuters.com/places/middle-east/rss.xml
+https://www.aljazeera.com/news/middleeast/
+https://www.arabnews.com/
+https://www.thenationalnews.com/
+https://www.haaretz.com/
+https://www.jpost.com/
+https://www.middleeasteye.net/
+https://www.reuters.com/places/middle-east
