@@ -1,0 +1,9 @@
+https://www.state.gov/rss-feeds/
+https://www.defense.gov/news/rss/
+https://rss.cnn.com/rss/cnn_allpolitics.rss
+https://rss.cnn.com/rss/money_latest.rss
+https://www.reuters.com/rssFeed/usNews
+https://www.bloomberg.com/feed/podcast/etf-report.xml
+https://www.cbc.ca/cmlink/rss-topstories
+https://feeds.npr.org/1001/rss.xml
+https://www.defense.gov/Newsroom/News-Feeds/

@@ -1,0 +1,7 @@
+https://www.euronews.com/rss?level=theme&name=politics
+https://www.euronews.com/rss?level=theme&name=business
+https://www.euronews.com/rss?level=theme&name=world
+https://rss.dw.com/xml/rss-en-all
+https://www.lemonde.fr/rss/une.xml
+https://feeds.bbci.co.uk/news/world/europe/rss.xml
+https://www.reuters.com/rssFeed/europeNews

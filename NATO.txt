@@ -1,0 +1,8 @@
+https://www.nato.int/nato_static_fl2014/assets/rss/en/rss.xml
+https://www.defensenews.com/feeds/all.xml
+https://www.janes.com/rss/news.xml
+https://theaviationist.com/feed/
+https://www.militarytimes.com/feeds/all.xml
+https://www.armytimes.com/feeds/all.xml
+https://foreignpolicy.com/feed/
+www.atlanticcounciluk.org/news/feed
