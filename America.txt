@@ -1,7 +1,9 @@
-https://news.google.com/rss/search?q=site:cnn.com+politics&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:cnn.com+business&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:reuters.com+us&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:bloomberg.com+markets&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:cbc.ca+canada&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:npr.org+politics&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:defense.gov+defense&hl=en&gl=US&ceid=US:en
+https://rss.cnn.com/rss/cnn_topstories.rss
+https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml
+https://feeds.npr.org/1004/rss.xml                
+https://feeds.a.dj.com/rss/RSSWorldNews.xml       
+https://www.cbc.ca/cmlink/rss-canada
+https://www.bloomberg.com/feed/podcast/bloombergbusinessweek.xml
+https://feeds.reuters.com/reuters/businessNews
+https://feeds.reuters.com/reuters/USNews
+https://www.defense.gov/desktopmodules/sharedlibrary/handlers/rss.ashx?type=news
