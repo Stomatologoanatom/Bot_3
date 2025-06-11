@@ -1,7 +1,6 @@
-https://news.google.com/rss/search?q=site:euronews.com+politics&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:euronews.com+business&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:euronews.com+news&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:dw.com+europe&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:lemonde.fr+europe&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:bbc.com+europe&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:reuters.com+europe&hl=en&gl=US&ceid=US:en
+https://www.euronews.com/rss?level=theme&name=news
+https://feeds.bbci.co.uk/news/world/europe/rss.xml
+https://www.lemonde.fr/rss/une.xml
+https://feeds.reuters.com/ReutersWorldNews
+https://www.dw.com/en/top-stories/s-9097?maca=en-rss-en-all-1573-rdf
+https://apnews.com/rss/apf-europe
