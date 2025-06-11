@@ -1,0 +1,6 @@
+https://news.google.com/rss/search?q=site:nhk.or.jp+asia&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:chinadaily.com.cn+china&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:thehindu.com+india&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:yna.co.kr+south+korea&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:aljazeera.com+asia&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:defense.gov+news&hl=en&gl=US&ceid=US:en

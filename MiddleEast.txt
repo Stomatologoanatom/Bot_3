@@ -1,0 +1,7 @@
+https://news.google.com/rss/search?q=site:aljazeera.com+middle+east&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:arabnews.com+middle+east&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:thenationalnews.com+middle+east&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:haaretz.com+middle+east&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:jpost.com+middle+east&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:middleeasteye.net+middle+east&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:reuters.com+middle+east&hl=en&gl=US&ceid=US:en

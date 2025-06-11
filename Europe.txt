@@ -1,0 +1,7 @@
+https://news.google.com/rss/search?q=site:euronews.com+politics&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:euronews.com+business&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:euronews.com+news&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:dw.com+europe&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:lemonde.fr+europe&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:bbc.com+europe&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:reuters.com+europe&hl=en&gl=US&ceid=US:en

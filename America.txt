@@ -1,0 +1,7 @@
+https://news.google.com/rss/search?q=site:cnn.com+politics&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:cnn.com+business&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:reuters.com+us&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:bloomberg.com+markets&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:cbc.ca+canada&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:npr.org+politics&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:defense.gov+defense&hl=en&gl=US&ceid=US:en

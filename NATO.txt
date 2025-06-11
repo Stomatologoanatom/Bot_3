@@ -1,0 +1,6 @@
+https://news.google.com/rss/search?q=site:nato.int+defense&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:defensenews.com+defense&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:theaviationist.com+military&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:militarytimes.com+military&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:armytimes.com+military&hl=en&gl=US&ceid=US:en
+https://news.google.com/rss/search?q=site:foreignpolicy.com+politics&hl=en&gl=US&ceid=US:en
