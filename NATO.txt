@@ -1,6 +1,6 @@
-https://news.google.com/rss/search?q=site:nato.int+defense&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:defensenews.com+defense&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:theaviationist.com+military&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:militarytimes.com+military&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:armytimes.com+military&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:foreignpolicy.com+politics&hl=en&gl=US&ceid=US:en
+https://www.nato.int/cps/en/natohq/news_ rss.xml
+https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml&siteId=1002957
+https://theaviationist.com/feed/
+https://www.militarytimes.com/arc/outboundfeeds/rss/?outputType=xml&siteId=1002957
+https://www.armytimes.com/arc/outboundfeeds/rss/?outputType=xml&siteId=1002957
+https://foreignpolicy.com/feed/
