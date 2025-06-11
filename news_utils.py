@@ -1,20 +1,16 @@
 import aiohttp
 import xml.etree.ElementTree as ET
 import logging
+import config
 
 async def fetch_rss(session, url):
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
     try:
-        async with session.get(url, timeout=10, headers=headers) as response:
-            content_type = response.headers.get('Content-Type', '')
-            if "xml" in content_type or "rss" in content_type:
-                return await response.text()
+        async with session.get(url, timeout=15, headers=headers) as response:
             text = await response.text()
-            if text.strip().startswith('<?xml') or '<rss' in text:
-                return text
-            else:
-                logging.warning(f"[RSS] Не удалось определить RSS по ссылке: {url}")
-                return None
+            return text
     except Exception as e:
         logging.error(f"[RSS] Ошибка запроса к {url}: {e}")
         return None
@@ -29,7 +25,6 @@ def parse_rss(text, max_items=3):
                 link = item.findtext('link', '').strip()
                 desc = item.findtext('description', '').strip()
                 pubdate = item.findtext('pubDate', '').strip()
-                # Если совсем ничего нет — пропускаем
                 if not title or not link:
                     continue
                 items.append({
@@ -38,7 +33,6 @@ def parse_rss(text, max_items=3):
                     'description': desc,
                     'pubDate': pubdate
                 })
-        # Google News иногда структура без channel
         if not items:
             for item in root.findall('.//item')[:max_items]:
                 title = item.findtext('title', '').strip()
@@ -70,3 +64,34 @@ async def fetch_all_news(sources, max_items=3):
                 logging.info(f"[NEWS] Нет новостей или пустая лента: {url}")
             results.extend(items)
     return results
+
+async def annotate_deepseek(news_item, api_key):
+    url = "https://api.deepseek.com/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    prompt = (
+        f"Проаннотируй новость в формате 'Кто? Где? Когда? Что сделал?'. "
+        f"Если невозможно — просто сделай краткую аннотацию. "
+        f"Объем — 5 предложений, язык — русский.\n\n"
+        f"Заголовок: {news_item['title']}\n"
+        f"Описание: {news_item['description']}"
+    )
+    data = {
+        "model": "deepseek-chat",  # если у тебя другой, поправь!
+        "messages": [
+            {"role": "system", "content": "Ты профессиональный новостной редактор."},
+            {"role": "user", "content": prompt}
+        ],
+        "max_tokens": 512,
+        "temperature": 0.7
+    }
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, headers=headers, json=data, timeout=20) as resp:
+            if resp.status == 200:
+                res = await resp.json()
+                return res["choices"][0]["message"]["content"].strip()
+            else:
+                logging.error(f"[DEEPSEEK] Ошибка ответа: {resp.status}, {await resp.text()}")
+                return "Не удалось получить аннотацию для этой новости."
