@@ -1,6 +1,7 @@
-https://news.google.com/rss/search?q=site:nhk.or.jp+asia&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:chinadaily.com.cn+china&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:thehindu.com+india&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:yna.co.kr+south+korea&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:aljazeera.com+asia&hl=en&gl=US&ceid=US:en
-https://news.google.com/rss/search?q=site:defense.gov+news&hl=en&gl=US&ceid=US:en
+https://www3.nhk.or.jp/rss/news/cat0.xml
+https://www.chinadaily.com.cn/rss/china_rss.xml
+https://www.thehindu.com/news/national/feeder/default.rss
+https://www.yna.co.kr/board/journalist-en/rss/xml/journalist_all_rss.xml
+https://www.aljazeera.com/xml/rss/all.xml
+https://feeds.reuters.com/reuters/AsiaNews
+https://www.defense.gov/desktopmodules/sharedlibrary/handlers/rss.ashx?type=news
